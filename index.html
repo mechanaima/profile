@@ -168,7 +168,11 @@ body{
    reads as a rail item at rest. */
 .rail li a{color:var(--accent-text);text-decoration:none}
 .rail li a:hover{text-decoration:underline;text-underline-offset:3px}
-.rail h4{margin:var(--gap-lg) 0 var(--gap-sm);font:12px/1.4 var(--mono);letter-spacing:.12em;color:var(--muted);
+/* Rail group labels. These caption the lists beneath them — they are not
+   document sections. As <h4> they came before the page <h3> and skipped a
+   level from <h2>, breaking heading order (2.4.6 / 1.3.1). The rule below
+   keeps the original look; only the semantics changed. */
+.rail-h{margin:var(--gap-lg) 0 var(--gap-sm);font:12px/1.4 var(--mono);letter-spacing:.12em;color:var(--muted);
   text-transform:uppercase}
 .rail .stackline{display:flex;flex-wrap:wrap;gap:6px;margin:0}
 /* These are properties, so they read as tags: a hue-nudged fill under a text
@@ -325,7 +329,7 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
           <li><a href="#panel-contact">Contact</a><span class="tick">↓</span></li>
           <li><a href="/accessibility.html">Accessibility</a><span class="tick">→</span></li>
         </ul>
-        <h4>Stack</h4>
+        <p class="rail-h">Stack</p>
         <p class="stackline">
           <span>Linux Mint</span><span>Arch</span><span>Windows</span><span>Active Directory</span>
           <span>Docker</span><span>Compose</span><span>Podman</span>
@@ -336,20 +340,20 @@ a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
           <span>JavaScript</span><span>Swift</span><span>Git</span><span>Jira</span>
           <span>ITIL</span><span>Microsoft 365</span>
         </p>
-        <h4>Elsewhere</h4>
+        <p class="rail-h">Elsewhere</p>
         <p class="stackline">
           <span>mechanima.tech</span><span>linkedin.com/in/noahmedd</span><span>github.com/mechanaima</span>
         </p>
-        <h4>Education</h4>
+        <p class="rail-h">Education</p>
         <p class="stackline">
           <span>Conestoga College</span><span>Sep 2025 - Aug 2027</span>
           <span>Computer Systems Technician</span>
         </p>
-        <h4>Credentials</h4>
+        <p class="rail-h">Credentials</p>
         <p class="stackline">
           <span>CIPS Ontario member</span><span>AWS Educate: GenAI</span>
         </p>
-        <h4>Languages</h4>
+        <p class="rail-h">Languages</p>
         <p class="stackline">
           <span>English - fluent</span><span>French - elementary</span>
         </p>
