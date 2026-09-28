@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Not found - Noah Medd</title>
+<meta name="description" content="That address does not resolve. Here is where to go instead." />
+<meta name="author" content="Noah Medd" />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#2D2D3E" />
+<style>
+
+:root{
+  /* nookboard design system — six tokens, nothing else declared */
+  --bg:oklch(30.5% 0.030 285);
+  --surface:oklch(38% 0.028 288);
+  --fg:oklch(80% 0.045 285);
+  --muted:oklch(75.7% 0.035 285);
+  --border:oklch(45% 0.045 290);
+  --accent:oklch(84% 0.090 320);
+  --accent-2:oklch(85% 0.070 232);
+  --accent-soft:color-mix(in oklch,var(--accent) 14%,transparent);
+  --fg-soft:color-mix(in oklch,var(--fg) 6%,transparent);
+  --tag-1:color-mix(in oklch,var(--accent) 6%,var(--surface));
+  --tag-2:color-mix(in oklch,var(--accent-2) 6%,var(--surface));
+  --tag-3:color-mix(in oklch,var(--accent) 4%,var(--accent-2) 3%,var(--surface));
+  --accent-solid:oklch(44% 0.075 285);
+  --grad-a:#e9bbeb;--grad-b:#caa8f7;--grad-c:#94d1ed;
+  --mark-gradient:linear-gradient(100deg,var(--grad-a),var(--grad-b) 55%,var(--grad-c));
+  --accent-text:oklch(86% 0.10 320);
+  --accent-2-text:oklch(87% 0.08 232);
+  --cyan:var(--accent-2-text);
+  --serif:var(--font-display);
+  --hand:var(--font-body);
+  --mono:var(--font-mono);
+  --gap-xs:8px;   --gap-sm:12px;  --gap-md:20px;  --gap-lg:32px;
+  --gap-xl:56px;  --gap-2xl:96px;
+  --container:1340px; --gutter:40px;
+  --radius:10px; --radius-lg:16px;
+  --font-display:'Iowan Old Style',Charter,Georgia,'Times New Roman',serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --font-mono:ui-monospace,'JetBrains Mono','SF Mono',Menlo,monospace;
+}
+*{box-sizing:border-box}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:100;
+  background:var(--surface);color:var(--fg);border:1px solid var(--accent-text);
+  border-radius:var(--radius);padding:12px var(--gap-md);
+  font:600 14px/1 var(--font-body);text-decoration:none}
+.skip:focus{left:var(--gutter);top:var(--gap-sm);outline:3px solid var(--accent-text);outline-offset:2px}
+#main:focus{outline:none}
+
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--fg);background:var(--bg);
+  background-image:radial-gradient(circle,color-mix(in oklch,var(--border) 30%,transparent) 1px,transparent 1.35px);
+  background-size:22px 22px;
+  font:16px/1.5 var(--font-body);
+  min-height:100vh;display:flex;flex-direction:column;
+}
+.sheet{max-width:var(--container);margin:0 auto;padding:var(--gap-lg) var(--gutter) var(--gap-2xl);
+  width:100%;flex:1;display:flex;flex-direction:column}
+
+/* ── header ─────────────────────────────────────────────── */
+.masthead{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--gap-md);
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:var(--gap-lg) var(--gap-lg) calc(var(--gap-lg) + 4px);margin-bottom:var(--gap-md);color:var(--fg)}
+.masthead h1{margin:0;font:600 clamp(34px,4.4vw,54px)/1.04 var(--serif);letter-spacing:-.02em;display:flex;
+  align-items:center;gap:var(--gap-md);flex-wrap:wrap;color:var(--fg)}
+.masthead h1 em{font-style:normal;background:var(--mark-gradient);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--fg)}
+.stamp{display:inline-flex;align-items:center;gap:var(--gap-xs);padding:6px var(--gap-sm);background:var(--bg);
+  border:1px dashed var(--border);color:var(--muted);font:12px/1 var(--mono);
+  letter-spacing:.18em;transform:rotate(-2.2deg)}
+.stamp i{width:6px;height:6px;background:var(--fg);transform:rotate(45deg)}
+
+/* ── the panel ──────────────────────────────────────────── */
+.lost{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:var(--gap-xl) clamp(28px,5vw,64px);max-width:88ch;margin-top:var(--gap-md)}
+
+/* the status code, set as the figure it is: mono, tabular, large, unmissable */
+.code{display:flex;align-items:baseline;gap:var(--gap-md);flex-wrap:wrap;margin-bottom:var(--gap-lg)}
+.code b{font:600 clamp(64px,12vw,132px)/.86 var(--mono);letter-spacing:-.04em;
+  font-variant-numeric:tabular-nums;color:var(--fg)}
+.code span{font:12px/1.5 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  padding:6px var(--gap-sm);border:1px solid var(--border);border-radius:999px}
+
+.lost h2{margin:0 0 var(--gap-sm);font:600 clamp(30px,3.6vw,44px)/1.06 var(--serif);letter-spacing:-.02em}
+.lost .lede{font:19px/1.55 var(--hand);color:var(--muted);margin:0 0 var(--gap-lg);max-width:62ch}
+.lost p{margin:0 0 var(--gap-md);font:17px/1.6 var(--hand)}
+.lost code{font:15px/1.4 var(--mono);background:var(--bg);border:1px solid var(--border);
+  border-radius:4px;padding:1px 6px;overflow-wrap:anywhere}
+.lost a{color:var(--accent-text)}
+
+/* ── destinations ───────────────────────────────────────── */
+.dest{margin-top:var(--gap-lg);padding-top:var(--gap-md);border-top:1px solid var(--border)}
+.dest h3{margin:0 0 var(--gap-sm);font:12px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted)}
+.dest ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--gap-xs)}
+.dest li{display:grid;grid-template-columns:minmax(0,auto) minmax(0,1fr) auto;gap:var(--gap-md);
+  align-items:baseline;padding:var(--gap-sm) 0;border-top:1px dashed var(--border)}
+.dest li:first-child{border-top:0}
+.dest .what{font:17px/1.35 var(--hand)}
+.dest .what small{display:block;font:14.5px/1.4 var(--hand);color:var(--muted);margin-top:3px}
+.dest .where{font:12px/1.5 var(--mono);color:var(--muted);text-align:right;overflow-wrap:anywhere}
+.tag{display:inline-block;font:11.5px/1 var(--mono);border:1px solid var(--border);text-decoration:none;
+  border-radius:999px;padding:5px var(--gap-xs);color:var(--fg);background:var(--tag-1)}
+.tag.hot{border-color:var(--accent);color:var(--fg);background:var(--tag-1)}
+a.tag:hover{border-color:var(--accent);background:var(--accent-soft)}
+.tag.cool{border-color:var(--accent-2);color:var(--fg);background:var(--tag-2)}
+
+/* ── footer ─────────────────────────────────────────────── */
+.foot{margin-top:var(--gap-2xl);padding-top:var(--gap-md);border-top:1px solid var(--border);display:flex;
+  justify-content:space-between;gap:var(--gap-md);flex-wrap:wrap;font:12px/1.6 var(--mono);color:var(--muted)}
+.foot b{color:var(--fg)}
+.foot a{color:var(--accent-text)}
+a:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
+
+@media (max-width:1000px){
+  .sheet{padding:var(--gap-md) var(--gap-md) var(--gap-xl)}
+  .lost{padding:var(--gap-lg) var(--gap-md)}
+  .masthead{gap:var(--gap-sm)}
+}
+@media (max-width:640px){
+  .dest li{grid-template-columns:minmax(0,1fr);gap:6px}
+  .dest .where{text-align:left}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sheet">
+
+  <header class="masthead" data-od-id="masthead">
+    <h1><em>Noah Medd</em><span class="stamp"><i></i>mechanima.tech</span></h1>
+  </header>
+
+  <div class="lost" id="main">
+    <div class="code">
+      <b>404</b>
+      <span>Address did not resolve</span>
+    </div>
+
+    <h2>Nothing lives here</h2>
+    <p class="lede">The page you asked for is not at this address. It may have been renamed, or the link that brought you here may be wrong.</p>
+
+    <p>No redirect is being hidden behind a soft error &mdash; this is a genuine 404. The request reached the host and matched no file.</p>
+
+    <div class="dest">
+      <h3>Where to go instead</h3>
+      <ul>
+        <li>
+          <span class="what"><a href="/">The profile</a><small>Six machines, services operated, and what I am looking for in a Winter 2027 co-op.</small></span>
+          <span class="where">/</span>
+        </li>
+        <li>
+          <span class="what"><a href="/accessibility.html">Accessibility statement</a><small>What was tested against WCAG 2.1 AA, and where this site still falls short.</small></span>
+          <span class="where">/accessibility.html</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="dest">
+      <h3>Reach me</h3>
+      <ul>
+        <li>
+          <span class="what">Email<small>Fastest route. Say what you were looking for and I will point you at it.</small></span>
+          <span class="where"><a class="tag hot" href="mailto:noah@mechanima.tech">noah@mechanima.tech</a></span>
+        </li>
+        <li>
+          <span class="what">GitHub<small>Repositories, configuration, and the writing that goes with them.</small></span>
+          <span class="where"><a class="tag" href="https://github.com/mechanaima" rel="me">github.com/mechanaima</a></span>
+        </li>
+        <li>
+          <span class="what">LinkedIn<small>Formal record, if that is what you need.</small></span>
+          <span class="where"><a class="tag cool" href="https://linkedin.com/in/noahmedd" rel="me">linkedin.com/in/noahmedd</a></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>Noah Medd</b> - mechanima.tech · Kitchener, ON</span>
+    <span>Computer Systems Technician, Conestoga College · available for co-op, Winter 2027</span>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Accessibility - Noah Medd</title>
+<meta name="description" content="Accessibility statement for mechanima.tech. What was tested, what the standard is, and what still falls short." />
+<meta name="author" content="Noah Medd" />
+<link rel="canonical" href="https://mechanima.tech/accessibility.html" />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#2D2D3E" />
+<style>
+
+:root{
+  /* nookboard design system — six tokens, nothing else declared */
+  --bg:oklch(30.5% 0.030 285);
+  --surface:oklch(38% 0.028 288);
+  --fg:oklch(80% 0.045 285);
+  --muted:oklch(75.7% 0.035 285);
+  --border:oklch(45% 0.045 290);
+  --accent:oklch(84% 0.090 320);
+  --accent-2:oklch(85% 0.070 232);
+  --accent-soft:color-mix(in oklch,var(--accent) 14%,transparent);
+  --fg-soft:color-mix(in oklch,var(--fg) 6%,transparent);
+  --card-1:var(--surface);
+  --card-2:var(--surface);
+  --card-3:var(--surface);
+  --tag-1:color-mix(in oklch,var(--accent) 6%,var(--surface));
+  --tag-2:color-mix(in oklch,var(--accent-2) 6%,var(--surface));
+  --tag-3:color-mix(in oklch,var(--accent) 4%,var(--accent-2) 3%,var(--surface));
+  --accent-solid:oklch(44% 0.075 285);
+  --on-accent:oklch(90% 0.03 285);
+  --grad-a:#e9bbeb;--grad-b:#caa8f7;--grad-c:#94d1ed;
+  --mark-gradient:linear-gradient(100deg,var(--grad-a),var(--grad-b) 55%,var(--grad-c));
+  --accent-text:oklch(86% 0.10 320);
+  --accent-2-text:oklch(87% 0.08 232);
+  --cyan:var(--accent-2-text);
+  --serif:var(--font-display);
+  --hand:var(--font-body);
+  --mono:var(--font-mono);
+  --gap-xs:8px;   --gap-sm:12px;  --gap-md:20px;  --gap-lg:32px;
+  --gap-xl:56px;  --gap-2xl:96px;
+  --container:1340px; --gutter:40px;
+  --radius:10px; --radius-lg:16px;
+  --font-display:'Iowan Old Style',Charter,Georgia,'Times New Roman',serif;
+  --font-body:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  --font-mono:ui-monospace,'JetBrains Mono','SF Mono',Menlo,monospace;
+  --shadow-lift:0 10px 24px color-mix(in oklch,var(--fg) 26%,transparent),
+                0 2px 6px  color-mix(in oklch,var(--fg) 18%,transparent);
+}
+*{box-sizing:border-box}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:100;
+  background:var(--surface);color:var(--fg);border:1px solid var(--accent-text);
+  border-radius:var(--radius);padding:12px var(--gap-md);
+  font:600 14px/1 var(--font-body);text-decoration:none}
+.skip:focus{left:var(--gutter);top:var(--gap-sm);outline:3px solid var(--accent-text);outline-offset:2px}
+#main:focus{outline:none}
+
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--fg);background:var(--bg);
+  background-image:radial-gradient(circle,color-mix(in oklch,var(--border) 30%,transparent) 1px,transparent 1.35px);
+  background-size:22px 22px;
+  font:16px/1.5 var(--font-body);
+}
+.sheet{max-width:var(--container);margin:0 auto;padding:var(--gap-lg) var(--gutter) var(--gap-2xl)}
+
+/* ── header ─────────────────────────────────────────────── */
+.masthead{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--gap-md);
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:var(--gap-lg) var(--gap-lg) calc(var(--gap-lg) + 4px);margin-bottom:var(--gap-md);color:var(--fg)}
+.masthead h1{margin:0;font:600 clamp(34px,4.4vw,54px)/1.04 var(--serif);letter-spacing:-.02em;display:flex;
+  align-items:center;gap:var(--gap-md);flex-wrap:wrap;color:var(--fg)}
+.masthead h1 em{font-style:normal;background:var(--mark-gradient);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--fg)}
+.stamp{display:inline-flex;align-items:center;gap:var(--gap-xs);padding:6px var(--gap-sm);background:var(--bg);
+  border:1px dashed var(--border);color:var(--muted);font:12px/1 var(--mono);
+  letter-spacing:.18em;transform:rotate(-2.2deg)}
+.stamp i{width:6px;height:6px;background:var(--fg);transform:rotate(45deg)}
+
+/* ── document frame: rail + prose, matching the profile page ───── */
+/* The old layout capped the whole document at 88ch inside a 1340px container,
+   which left ~600px of dead space to the right of a full-width masthead. The
+   page now uses the same 216px rail + fluid main grid the profile uses, so the
+   two pages read as one site. */
+.frame{display:grid;grid-template-columns:216px minmax(0,1fr);gap:var(--gap-xl);align-items:start}
+.rail{position:sticky;top:var(--gap-lg)}
+/* These are group labels for the metadata lists, not headings. As <h4> they
+   preceded the page <h2> and broke heading order (H1->H4->H4->H2). They stay
+   visually identical but carry no heading semantics. */
+.rail-h{margin:0 0 var(--gap-sm);font:12px/1.4 var(--mono);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted)}
+.rail-h:not(:first-child){margin-top:var(--gap-lg)}
+.rail dl{margin:0;display:grid;grid-template-columns:1fr;gap:var(--gap-sm)}
+.rail dt{font:11.5px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.rail dd{margin:2px 0 0;font:15px/1.45 var(--hand);color:var(--fg);overflow-wrap:anywhere}
+.rail a{color:var(--accent-text)}
+.rail .back{display:inline-block;margin-top:var(--gap-lg);font:14px/1 var(--hand)}
+.rail .back::before{content:"← ";font-family:var(--mono)}
+
+.doc{min-width:0}
+
+/* ── document body ──────────────────────────────────────── */
+.prose{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:var(--gap-xl) clamp(28px,4vw,56px)}
+.prose h2{margin:0 0 var(--gap-sm);font:600 clamp(30px,3.4vw,42px)/1.06 var(--serif);letter-spacing:-.02em}
+/* Headings lead their section. The old rule gave every h3 a 56px top margin,
+   but the first one follows the chip row — so the biggest gap on the page sat
+   between two things that belong together. */
+.prose h3{margin:var(--gap-xl) 0 var(--gap-md);font:600 22px/1.2 var(--serif);letter-spacing:-.01em;
+  padding-bottom:var(--gap-xs);border-bottom:1px solid var(--border)}
+.prose h3:first-of-type{margin-top:var(--gap-lg)}
+.prose h4{margin:var(--gap-lg) 0 var(--gap-xs);font:12px/1.4 var(--mono);letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted)}
+.prose p{margin:0 0 var(--gap-md);font:17px/1.6 var(--hand);max-width:74ch}
+.prose ul{margin:0 0 var(--gap-md);padding-left:22px;font:17px/1.6 var(--hand);max-width:74ch}
+.prose li+li{margin-top:var(--gap-xs)}
+.prose li::marker{color:var(--muted)}
+.prose a{color:var(--accent-text)}
+.prose strong{font-weight:600}
+.prose code{font:15px/1.4 var(--mono);background:var(--bg);border:1px solid var(--border);
+  border-radius:4px;padding:1px 6px;overflow-wrap:anywhere}
+.lede{font:19px/1.55 var(--hand);color:var(--muted);margin:0 0 var(--gap-md);max-width:74ch}
+.stamp-row{display:flex;flex-wrap:wrap;gap:var(--gap-xs);margin:0 0 var(--gap-sm)}
+.chip{font:12px/1.35 var(--mono);letter-spacing:.12em;padding:6px var(--gap-sm);border:1px solid var(--border);
+  border-radius:999px;color:var(--muted)}
+.chip.ok{border-color:var(--accent-2);color:var(--fg);background:var(--tag-2)}
+.chip.gap{border-color:var(--accent);color:var(--fg);background:var(--tag-1)}
+
+/* results table — a real table, because it is tabular data */
+.results{width:100%;border-collapse:collapse;margin:0 0 var(--gap-lg);font:15px/1.45 var(--hand)}
+.results th,.results td{text-align:left;padding:var(--gap-sm) var(--gap-sm) var(--gap-sm) 0;
+  border-top:1px dashed var(--border);vertical-align:top}
+.results thead th{border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  font:11.5px/1.4 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.results td.verdict{white-space:nowrap;font:12px/1.4 var(--mono)}
+.results td.verdict.pass{color:var(--cyan)}
+.results td.verdict.gap{color:var(--accent-text)}
+.results td.verdict.na{color:var(--muted)}
+.results code{font-size:13.5px}
+
+.callout{border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);
+  background:var(--bg);padding:var(--gap-md) var(--gap-lg);margin:0 0 var(--gap-lg);max-width:74ch;
+  font:16px/1.55 var(--hand)}
+.callout p:last-child{margin-bottom:0}
+
+/* ── footer rule + colophon ────────────────────────────── */
+.foot{margin-top:var(--gap-2xl);padding-top:var(--gap-md);border-top:1px solid var(--border);display:flex;
+  justify-content:space-between;gap:var(--gap-md);flex-wrap:wrap;font:12px/1.6 var(--mono);color:var(--muted)}
+.foot b{color:var(--fg)}
+.foot a{color:var(--accent-text)}
+a:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
+
+/* ── responsive ────────────────────────────────────────── */
+@media (max-width:1000px){
+  .sheet{padding:var(--gap-md) var(--gap-md) var(--gap-xl)}
+  .frame{grid-template-columns:1fr;gap:var(--gap-lg)}
+  .rail{position:static;order:-1}
+  .prose{padding:var(--gap-lg) var(--gap-md)}
+  .masthead{gap:var(--gap-sm)}
+}
+@media (max-width:640px){
+  .results th:nth-child(3),.results td:nth-child(3){display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sheet">
+
+  <header class="masthead" data-od-id="masthead">
+    <h1><em>Noah Medd</em><span class="stamp"><i></i>mechanima.tech</span></h1>
+  </header>
+
+  <div class="frame">
+    <aside class="rail" aria-label="Statement details">
+      <p class="rail-h">This statement</p>
+      <dl>
+        <dt>Prepared</dt>
+        <dd>28 September 2026</dd>
+        <dt>Standard</dt>
+        <dd>EN 301 549 v2.1.2, clause 9</dd>
+        <dt>Maps to</dt>
+        <dd>WCAG 2.1 Level AA</dd>
+        <dt>Method</dt>
+        <dd>Automated browser measurement</dd>
+        <dt>Reviewed by</dt>
+        <dd>The site owner, not an independent third party</dd>
+      </dl>
+      <p class="rail-h">Coverage</p>
+      <dl>
+        <dt>Passed</dt>
+        <dd>13 requirements</dd>
+        <dt>Open</dt>
+        <dd>No screen-reader pass</dd>
+      </dl>
+      <a class="back" href="/">Back to the profile</a>
+    </aside>
+
+    <div class="doc">
+    <div class="prose" id="main">
+    <h2>Accessibility</h2>
+    <p class="lede">This page says what was actually tested on this site, what standard it was tested against, and where it still falls short. It is a statement of fact, not a claim of certification.</p>
+
+    <div class="stamp-row">
+      <span class="chip ok">Target: WCAG 2.1 Level AA</span>
+      <span class="chip ok">Standard: EN 301 549 v2.1.2 &sect;9</span>
+      <span class="chip gap">1 open item</span>
+    </div>
+
+    <h3>What standard, and why</h3>
+    <p>This site targets <strong>WCAG 2.1 Level AA</strong>, tested through the web requirements of <strong>ETSI EN 301 549 v2.1.2, clause 9</strong>. Clause 9 &sect;9.5 is the provision that incorporates WCAG 2.1 at Level AA, so the two are the same bar stated in two ways.</p>
+    <p>EN 301 549 is the harmonised European standard for accessible ICT. It is the reference that Canadian accessibility guidance points organisations to, which is why it is named here rather than only WCAG. Nothing on this page depends on being read in a particular jurisdiction: the measured requirements are the WCAG 2.1 AA ones.</p>
+
+    <h3>How it was tested</h3>
+    <p>By automated probes against the rendered page in a real browser, measuring the document the way a user agent computes it rather than reading the source:</p>
+    <ul>
+      <li>Text and non-text contrast measured from <em>computed</em> styles, resolving <code>oklch()</code> to sRGB through the browser&rsquo;s own parser so modern colour syntax measures correctly instead of silently returning nothing.</li>
+      <li>Reflow at 320&nbsp;CSS&nbsp;px and at 200&#8239;% text zoom, checking for horizontal scrolling rather than assuming it.</li>
+      <li>Text-spacing overrides (line height, paragraph, letter and word spacing) applied to confirm no content is clipped.</li>
+      <li>Keyboard reachability, focus visibility, heading order, language, duplicate ids, and accessible names for interactive elements.</li>
+    </ul>
+    <p>Contrast was measured against the <strong>composited</strong> background &mdash; translucent colours flattened over what is actually behind them &mdash; so the numbers below reflect what renders, not what the stylesheet intends.</p>
+
+    <h3>Results</h3>
+    <p>Measured on this site&rsquo;s pages. &ldquo;Not applicable&rdquo; means the page contains nothing for that requirement to apply to, which is how absence is treated under clause 9.0.</p>
+
+    <table class="results">
+      <thead>
+        <tr><th scope="col">Requirement</th><th scope="col">What it covers</th><th scope="col">Result</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>9.1.1.1</code></td><td>Non-text content has a text alternative</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.1.4.3</code></td><td>Contrast (minimum) &mdash; 4.5:1 text, 3:1 large</td><td class="verdict pass">Pass &mdash; worst 4.64:1</td></tr>
+        <tr><td><code>9.1.4.4</code></td><td>Resize text to 200&#8239;% without loss</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.1.4.10</code></td><td>Reflow at 320&nbsp;CSS&nbsp;px, no two-dimensional scroll</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.1.4.11</code></td><td>Non-text contrast &mdash; 3:1 for meaningful graphics</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.1.4.12</code></td><td>Text spacing overrides do not clip content</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.2.1.1</code></td><td>Keyboard &mdash; everything operable is reachable</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.2.3.1</code></td><td>Three flashes &mdash; no flashing content</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.2.4.1</code></td><td>Bypass blocks &mdash; skip link past repeated content</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.2.4.2</code></td><td>Page titles are present and meaningful</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.2.4.6</code></td><td>Headings and labels describe their topic</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.3.1.1</code></td><td>Language of the page is set</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.4.1.1</code></td><td>Parsing &mdash; no duplicate ids</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.4.1.2</code></td><td>Name, role, value for interactive elements</td><td class="verdict pass">Pass</td></tr>
+        <tr><td><code>9.1.2.x</code></td><td>Time-based media alternatives</td><td class="verdict na">N/A &mdash; no media</td></tr>
+        <tr><td><code>9.2.2.1</code></td><td>Timing adjustable</td><td class="verdict na">N/A &mdash; no time limits</td></tr>
+        <tr><td><code>9.2.2.2</code></td><td>Pause, stop, hide moving content</td><td class="verdict na">N/A &mdash; nothing moves</td></tr>
+        <tr><td><code>9.1.3.5</code></td><td>Identify input purpose</td><td class="verdict na">N/A &mdash; no forms</td></tr>
+        <tr><td><code>9.3.3.x</code></td><td>Input assistance, error identification</td><td class="verdict na">N/A &mdash; no data entry</td></tr>
+        <tr><td><code>9.1.4.13</code></td><td>Content on hover or focus</td><td class="verdict na">N/A &mdash; no overlays</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>On the contrast margin.</strong> The tightest pair in the palette measures 4.64:1 against a 4.50:1 floor. That passes, and it passes honestly, but the headroom is small by design: the muted tone was lifted only on the lightness axis to get clear of the threshold. Anyone editing the palette should re-measure rather than assume the margin survives.</p>
+    </div>
+
+    <h3>Where it falls short</h3>
+    <p>These are real, and stated plainly rather than rounded off:</p>
+    <ul>
+      <li><strong>No screen-reader pass.</strong> Everything above is machine-measured. No assistive-technology session &mdash; NVDA, JAWS, or VoiceOver &mdash; has been run against this site. That is the single largest gap in this statement: automated tools cannot judge whether a text alternative is <em>accurate</em>, whether reading order makes sense, or whether an interface is coherent when heard rather than seen.</li>
+      <li><strong>Not everything is machine-checkable.</strong> Clause 9 runs to fifty requirements at Level AA. The table covers a subset. Requirements that need human judgement &mdash; whether alt text is meaningful, whether link text is descriptive in context, whether content is understandable &mdash; are outside what these probes can assert.</li>
+      <li><strong>No conformance claim.</strong> A statement that this site &ldquo;conforms to EN 301 549&rdquo; would require a full audit, manual testing with assistive technology, and a documented evaluation. That has not happened, so no such claim is made here.</li>
+      <li><strong>One page, one browser.</strong> Measurements were taken in Chromium. Behaviour in other engines, and with browser extensions or user stylesheets or forced-colours modes applied, is not characterised.</li>
+    </ul>
+
+    <h3>Feedback</h3>
+    <p>If something on this site does not work for you &mdash; an inaccessible control, a contrast problem, content that reads badly with a screen reader &mdash; tell me directly and I will fix it. Email <a href="mailto:noah@mechanima.tech">noah@mechanima.tech</a>.</p>
+    <p>If you need something on this site in a different form, ask. It is a static page; converting it is straightforward.</p>
+
+    <h3>Details of this statement</h3>
+    <ul>
+      <li><strong>Prepared:</strong> 28 September 2026</li>
+      <li><strong>Standard applied:</strong> ETSI EN 301 549 v2.1.2, clause 9 (&sect;9.5 &rarr; WCAG 2.1 Level AA)</li>
+      <li><strong>Method:</strong> automated browser measurement of the rendered document; no assistive-technology testing performed</li>
+      <li><strong>Reviewed by:</strong> the site owner, not an independent third party</li>
+    </ul>
+    <p style="color:var(--muted);font-size:15px">This statement will be updated when a screen-reader pass is completed, or when the page changes enough to invalidate the measurements above.</p>
+    </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <span><b>Noah Medd</b> - mechanima.tech · Kitchener, ON</span>
+    <span><a href="/">Back to the profile</a></span>
+  </div>
+</div>
+</body>
+</html>
