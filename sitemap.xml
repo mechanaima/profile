@@ -2,7 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://mechanima.tech/</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-01</lastmod>
+    <image:image xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+      <image:loc>https://mechanima.tech/img/og-card.jpg</image:loc>
+      <image:title>Noah Medd - Computer Systems Technician</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://mechanima.tech/accessibility.html</loc>

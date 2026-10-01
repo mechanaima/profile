@@ -7,6 +7,18 @@
 <meta name="description" content="Accessibility statement for mechanima.tech. What was tested, what the standard is, and what still falls short." />
 <meta name="author" content="Noah Medd" />
 <link rel="canonical" href="https://mechanima.tech/accessibility.html" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Accessibility - Noah Medd" />
+<meta property="og:description" content="What was tested against WCAG 2.1 AA on mechanima.tech, and where the site still falls short." />
+<meta property="og:url" content="https://mechanima.tech/accessibility.html" />
+<meta property="og:image" content="https://mechanima.tech/img/og-card.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Noah Medd, Computer Systems Technician. Open to a Winter 2027 co-op." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Accessibility - Noah Medd" />
+<meta name="twitter:description" content="What was tested against WCAG 2.1 AA on mechanima.tech, and where the site still falls short." />
+<meta name="twitter:image" content="https://mechanima.tech/img/og-card.jpg" />
 <meta name="robots" content="noindex" />
 <meta name="theme-color" content="#2D2D3E" />
 <style>
@@ -265,6 +277,7 @@ a:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
       <li><strong>Not everything is machine-checkable.</strong> Clause 9 runs to fifty requirements at Level AA. The table covers a subset. Requirements that need human judgement &mdash; whether alt text is meaningful, whether link text is descriptive in context, whether content is understandable &mdash; are outside what these probes can assert.</li>
       <li><strong>No conformance claim.</strong> A statement that this site &ldquo;conforms to EN 301 549&rdquo; would require a full audit, manual testing with assistive technology, and a documented evaluation. That has not happened, so no such claim is made here.</li>
       <li><strong>One page, one browser.</strong> Measurements were taken in Chromium. Behaviour in other engines, and with browser extensions or user stylesheets or forced-colours modes applied, is not characterised.</li>
+      <li><strong>The share card image has no text alternative in situ.</strong> The social preview image at <code>/img/og-card.jpg</code> carries its content as <em>painted pixels</em> &mdash; the name, role and summary are drawn into the JPEG rather than being selectable text. Its meaning is conveyed to assistive technology only through the <code>og:image:alt</code> and <code>twitter:image:alt</code> attributes, which crawlers and social platforms may or may not surface. The same information is available as real text on this page and the profile page.</li>
     </ul>
 
     <h3>Feedback</h3>
