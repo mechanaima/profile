@@ -25,13 +25,18 @@
 
 :root{
   /* nookboard design system — six tokens, nothing else declared */
-  --bg:oklch(30.5% 0.030 285);
-  --surface:oklch(38% 0.028 288);
-  --fg:oklch(80% 0.045 285);
-  --muted:oklch(75.7% 0.035 285);
-  --border:oklch(45% 0.045 290);
-  --accent:oklch(84% 0.090 320);
-  --accent-2:oklch(85% 0.070 232);
+  --bg:#2d2d3e;        --bg:oklch(30.5% 0.030 285);
+  /* --surface is 35.5%, down from 38%. --muted on --surface was the tightest
+     pair in the system at 4.64:1; darkening the ground rather than lifting
+     --muted fixes it at 5.10:1 and lifts every tag fill with it, without
+     squeezing --muted toward --fg. Plain hex first as a fallback for parsers
+     that cannot read oklch(); see the note on the index page. */
+  --surface:#3b3a4a;   --surface:oklch(35.5% 0.028 288);
+  --fg:#babada;        --fg:oklch(80% 0.045 285);
+  --muted:#adaec6;     --muted:oklch(75.7% 0.035 285);
+  --border:#55516d;    --border:oklch(45% 0.045 290);
+  --accent:#e5b8ef;    --accent:oklch(84% 0.090 320);
+  --accent-2:#a0d7f4;  --accent-2:oklch(85% 0.070 232);
   --accent-soft:color-mix(in oklch,var(--accent) 14%,transparent);
   --fg-soft:color-mix(in oklch,var(--fg) 6%,transparent);
   --card-1:var(--surface);
@@ -244,7 +249,7 @@ a:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
       </thead>
       <tbody>
         <tr><td><code>9.1.1.1</code></td><td>Non-text content has a text alternative</td><td class="verdict pass">Pass</td></tr>
-        <tr><td><code>9.1.4.3</code></td><td>Contrast (minimum) &mdash; 4.5:1 text, 3:1 large</td><td class="verdict pass">Pass &mdash; worst 4.64:1</td></tr>
+        <tr><td><code>9.1.4.3</code></td><td>Contrast (minimum) &mdash; 4.5:1 text, 3:1 large</td><td class="verdict pass">Pass &mdash; worst 5.02:1</td></tr>
         <tr><td><code>9.1.4.4</code></td><td>Resize text to 200&#8239;% without loss</td><td class="verdict pass">Pass</td></tr>
         <tr><td><code>9.1.4.10</code></td><td>Reflow at 320&nbsp;CSS&nbsp;px, no two-dimensional scroll</td><td class="verdict pass">Pass</td></tr>
         <tr><td><code>9.1.4.11</code></td><td>Non-text contrast &mdash; 3:1 for meaningful graphics</td><td class="verdict pass">Pass</td></tr>
@@ -267,7 +272,7 @@ a:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
     </table>
 
     <div class="callout">
-      <p><strong>On the contrast margin.</strong> The tightest pair in the palette measures 4.64:1 against a 4.50:1 floor. That passes, and it passes honestly, but the headroom is small by design: the muted tone was lifted only on the lightness axis to get clear of the threshold. Anyone editing the palette should re-measure rather than assume the margin survives.</p>
+      <p><strong>On the contrast margin.</strong> The tightest pair in the palette now measures 5.02:1 against a 4.50:1 floor, up from 4.64:1. The fix was applied to the ground rather than the ink: <code>--surface</code> was darkened from 38&#8239;% to 35.5&#8239;% lightness, which raised <em>every</em> pair sitting on it at once &mdash; muted text (4.64 to 5.10) and all three tag fills (4.62&ndash;4.74 to 5.02&ndash;5.16). Lifting <code>--muted</code> instead would have cleared the threshold but left it 0.01 lightness from <code>--fg</code>, collapsing the two-tone hierarchy. Anyone editing the palette should re-measure rather than assume the margin survives.</p>
     </div>
 
     <h3>Where it falls short</h3>
@@ -278,6 +283,8 @@ a:focus-visible{outline:3px solid var(--accent-text);outline-offset:2px}
       <li><strong>No conformance claim.</strong> A statement that this site &ldquo;conforms to EN 301 549&rdquo; would require a full audit, manual testing with assistive technology, and a documented evaluation. That has not happened, so no such claim is made here.</li>
       <li><strong>One page, one browser.</strong> Measurements were taken in Chromium. Behaviour in other engines, and with browser extensions or user stylesheets or forced-colours modes applied, is not characterised.</li>
       <li><strong>The share card image has no text alternative in situ.</strong> The social preview image at <code>/img/og-card.jpg</code> carries its content as <em>painted pixels</em> &mdash; the name, role and summary are drawn into the JPEG rather than being selectable text. Its meaning is conveyed to assistive technology only through the <code>og:image:alt</code> and <code>twitter:image:alt</code> attributes, which crawlers and social platforms may or may not surface. The same information is available as real text on this page and the profile page.</li>
+      <li><strong>Level AAA contrast is not met, and is not targeted.</strong> This site targets WCAG 2.1 Level AA. The AAA threshold (1.4.6) requires 7:1, which the muted text tokens do not reach &mdash; they measure 5.02&ndash;6.95:1. Clearing 7:1 would require <code>--muted</code> at roughly 88&#8239;% lightness, which collapses it into <code>--fg</code> and removes the distinction the reading hierarchy depends on. Automated audits configured for AAA will report these as failures; that is accurate, and it is a bar this site deliberately does not claim.</li>
+      <li><strong>Automated tools may misread the palette.</strong> The colour tokens are authored in <code>oklch()</code> and composited with <code>color-mix()</code>. Plain sRGB hex fallbacks are declared first for parsers that cannot read modern colour syntax, but a scanner that fails to parse <code>color-mix()</code> or <code>oklch()</code> may substitute a default background rather than reporting that it could not measure &mdash; producing a contrast failure that does not exist in any real browser. Verify reported failures against the rendered page before acting on them. The ratios quoted in this statement were computed from the tokens directly, with <code>color-mix()</code> flattened the way a browser composites it.</li>
     </ul>
 
     <h3>Feedback</h3>

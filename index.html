@@ -24,17 +24,32 @@
 <style>
 
 :root{
-  /* nookboard design system — six tokens, nothing else declared */
-  --bg:oklch(30.5% 0.030 285);
-  --surface:oklch(38% 0.028 288);
-  --fg:oklch(80% 0.045 285);
+  /* nookboard design system — six tokens, nothing else declared.
+
+     Plain sRGB hex fallbacks are declared first, then the oklch() values.
+     A browser that understands oklch() uses the second declaration (it wins
+     on source order); a parser that does not understand oklch() keeps the
+     hex. Without this, tools that cannot parse modern colour syntax
+     silently substitute their own default — an automated audit reported
+     these chips as "green on green" at 2.72:1 because it fell back to the
+     user-agent link colour rather than admitting it could not measure.
+     Values here are the exact sRGB equivalents of the oklch() tokens. */
+  --bg:#2d2d3e;        --bg:oklch(30.5% 0.030 285);
+  /* --surface is 35.5%, down from 38%. --muted on --surface was the tightest
+     pair in the system at 4.64:1; darkening the ground rather than lifting
+     --muted fixes it at 5.10:1 AND lifts every tag fill with it (4.62-4.74 ->
+     5.02-5.16), without squeezing --muted toward --fg. Lifting --muted to
+     79% would have cleared 5:1 but left it 0.01 L from --fg — the two-tone
+     hierarchy would have read as one tone. */
+  --surface:#3b3a4a;   --surface:oklch(35.5% 0.028 288);
+  --fg:#babada;        --fg:oklch(80% 0.045 285);
   /* --muted lifted on the L axis only (75% -> 75.7%, hue and chroma held) so it
-     clears 4.6:1 on --surface and has headroom to survive card tint and the
-     --fg-soft hover. This is the pair DESIGN.md flags as first to break. */
-  --muted:oklch(75.7% 0.035 285);
-  --border:oklch(45% 0.045 290);
-  --accent:oklch(84% 0.090 320);
-  --accent-2:oklch(85% 0.070 232);
+     clears 4.5:1 on --surface. It was the pair DESIGN.md flagged as first to
+     break; --surface now carries the headroom instead. */
+  --muted:#adaec6;     --muted:oklch(75.7% 0.035 285);
+  --border:#55516d;    --border:oklch(45% 0.045 290);
+  --accent:#e5b8ef;    --accent:oklch(84% 0.090 320);
+  --accent-2:#a0d7f4;  --accent-2:oklch(85% 0.070 232);
   /* derived at the point of use, never declared as a ladder */
   --accent-soft:color-mix(in oklch,var(--accent) 14%,transparent);
   --fg-soft:color-mix(in oklch,var(--fg) 6%,transparent);
